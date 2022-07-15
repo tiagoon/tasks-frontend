@@ -3,6 +3,27 @@
     margin-bottom: 20px;
     padding: 30px;
     background-color: #fff;
-    border-radius: 2px;
+    border-radius: 12px;
+    border-color: #f9f9f9;
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+.auth {
+    .justify-content-center{
+        min-height: 100vh;
+    }
+    .title {
+        font-weight: 700;
+    }
+    .subtitle {
+        font-size: 15px;
+        font-weight: 400;
+        color: #7e7e7e;
+    }
+    .form {
+        padding: 20px 30px;
+    }
+    .or-option{
+        color: #7e7e7e;
+    }
 }
