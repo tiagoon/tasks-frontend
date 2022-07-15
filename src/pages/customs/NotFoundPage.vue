@@ -18,6 +18,9 @@
 <script>
 export default {
     name: 'NotFoundPage',
+    created () {
+        document.title = "404 | " + process.env.VUE_APP_NAME;
+    },
     methods: {
         home() {
             this.$router.push('/');

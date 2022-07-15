@@ -5,6 +5,7 @@ import RegisterPage from '@/pages/auth/RegisterPage'
 import TasksIndexPage from '@/pages/tasks/TasksIndexPage'
 import TasksCreatePage from '@/pages/tasks/TasksCreatePage'
 import TasksUpdatePage from '@/pages/tasks/TasksUpdatePage'
+import ProfilePage from '@/pages/account/ProfilePage'
 import NotFoundPage from '@/pages/customs/NotFoundPage'
 
 const routes = [
@@ -33,7 +34,11 @@ const routes = [
     name: "TasksUpdatePage",
     component: TasksUpdatePage,
   },
-  
+  {
+    path: "/profile",
+    name: "ProfilePage",
+    component: ProfilePage,
+  },
   {
     path: "/:catchAll(.*)",
     component: NotFoundPage,

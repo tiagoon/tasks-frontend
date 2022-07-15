@@ -8,7 +8,7 @@
 export default {
   name: 'App',
   created () {
-    document.title = "Faça Login | Tarefas";
+    document.title = process.env.VUE_APP_NAME;
   },
 }
 </script>

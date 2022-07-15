@@ -12,8 +12,8 @@
     "axios": "^0.27.2",
     "bootstrap": "^5.1.3",
     "bootstrap-vue-3": "^0.1.14",
-    "buefy": "^0.9.21",
     "core-js": "^3.6.5",
+    "dayjs": "^1.11.3",
     "vue": "^3.0.0",
     "vue-router": "4"
   },
