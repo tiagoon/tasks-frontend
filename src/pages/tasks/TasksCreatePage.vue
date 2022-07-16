@@ -23,10 +23,16 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <button 
+                                    v-if="!loading"
                                     @click="taskCreate()"
                                     type="button" 
                                     class="btn btn-primary btn-block">
                                     Cadastrar</button>
+                                <b-spinner 
+                                    v-else
+                                    class="mx-auto"
+                                    type="grow"
+                                    variant="primary" />
                             </div>
                         </div>
                     </div>
@@ -53,6 +59,7 @@ export default {
                 title: '',
             },
             messageError: '',
+            loading: false
         }
     },
     methods: {
@@ -64,10 +71,13 @@ export default {
             }
 
             try {
-                await this.$axios.post('/tasks', this.task, config);
-                this.$router.push('/tasks');
+                this.loading = true
+                await this.$axios.post('/tasks', this.task, config)
+                this.loading = false
+                this.$router.push('/tasks')
+
             } catch (error) {
-                console.log(error)
+                this.loading = false
                 this.messageError = error.response.data.message
             }
         },

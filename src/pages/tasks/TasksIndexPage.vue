@@ -116,7 +116,8 @@ export default {
                     config
                 )
                 const index = this.tasks.findIndex(prop => prop.id === taskId)
-                this.tasks.splice(index,1)
+                this.tasks[index].completed = "1"
+                this.tasks[index].updated_at = dayjs().format('YYYY-MM-DD HH:mm:ss')
                 this.loading = false
                 
             } catch (error) {

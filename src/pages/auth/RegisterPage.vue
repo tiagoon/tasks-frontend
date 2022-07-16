@@ -14,18 +14,21 @@
                     placeholder="Nome" />
 
                 <b-form-input 
-                    v-model="user.email" 
-                    class="mb-3"
-                    placeholder="E-mail" />
-
-                <b-form-input 
                     v-model="user.phone" 
+                    v-maska="'(##)#####-####'"
                     class="mb-3"
                     placeholder="Telefone" />
 
                 <b-form-input 
+                    v-model="user.email" 
+                    class="mb-3"
+                    type="email"
+                    placeholder="E-mail" />
+
+                <b-form-input 
                     v-model="user.password" 
                     class="mb-3"
+                    type="password"
                     placeholder="Crie uma senha" />
                 
                 <div v-if="messageError.length>0" class="badge badge-pill bg-danger mb-3">{{messageError}}</div>
@@ -58,9 +61,11 @@
 </template>
 
 <script>
+import { maska } from 'maska'
+
 export default {
     name: 'RegisterPage',
-    
+    directives: { maska },
     data() {
         return {
             user: {
@@ -95,7 +100,7 @@ export default {
 
                 this.loading = false
                 this.$router.push('/tasks')
-                
+
             } catch (error) {
                 this.loading = false
                 this.messageError = error.response.data.message

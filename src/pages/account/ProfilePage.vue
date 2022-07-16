@@ -18,6 +18,7 @@
                         class="form-control mb-3 mt-3"
                         id="title" 
                         v-model="user.phone" 
+                        v-maska="'(##) #####-####'"
                         placeholder="Telefone">
                     
                     <div 
@@ -50,6 +51,7 @@
 </template>
 
 <script>
+import { maska } from 'maska'
 import NavbarComponent from '@/components/NavbarComponent';
 
 export default {
@@ -57,6 +59,7 @@ export default {
     components: {
         NavbarComponent
     },
+    directives: { maska },
     data() {
         return {
             user: {

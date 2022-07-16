@@ -5,7 +5,7 @@
                 {{appName}}
             </div>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+                <span class="material-icons-outlined">menu</span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
@@ -16,7 +16,7 @@
                         <router-link to="/profile" class="nav-link">Atualizar Perfil</router-link>
                     </li>
                 </ul>
-                <div class="d-flex">
+                <div class="d-lg-flex">
                     <a @click="logout()" class="nav-link btn btn-link">Sair</a>
                 </div>
             </div>
