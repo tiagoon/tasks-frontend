@@ -4,7 +4,7 @@ import LoginPage from '@/pages/auth/LoginPage'
 import RegisterPage from '@/pages/auth/RegisterPage'
 import TasksIndexPage from '@/pages/tasks/TasksIndexPage'
 import TasksCreatePage from '@/pages/tasks/TasksCreatePage'
-import TasksUpdatePage from '@/pages/tasks/TasksUpdatePage'
+import TasksEditPage from '@/pages/tasks/TasksEditPage'
 import ProfilePage from '@/pages/account/ProfilePage'
 import NotFoundPage from '@/pages/customs/NotFoundPage'
 
@@ -31,8 +31,8 @@ const routes = [
   },
   {
     path: "/tasks/:id",
-    name: "TasksUpdatePage",
-    component: TasksUpdatePage,
+    name: "TasksEditPage",
+    component: TasksEditPage,
   },
   {
     path: "/profile",

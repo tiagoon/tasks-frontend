@@ -11,9 +11,15 @@
                                 type="text" 
                                 class="form-control" 
                                 id="title" 
-                                v-model="title" 
+                                v-model="task.title" 
                                 placeholder="Título da tarefa">
                         </div>
+                        
+                        <div 
+                            v-if="messageError.length>0" 
+                            class="badge badge-pill bg-danger mb-3">
+                            {{messageError}}</div>
+
                         <div class="row">
                             <div class="col-md-12">
                                 <button 
@@ -43,12 +49,27 @@ export default {
     },
     data() {
         return {
-            //
+            task: {
+                title: '',
+            },
+            messageError: '',
         }
     },
     methods: {
-        taskCreate() {
-            this.$router.push('/tasks');
+        async taskCreate() {
+            let config = {
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
+                }
+            }
+
+            try {
+                await this.$axios.post('/tasks', this.task, config);
+                this.$router.push('/tasks');
+            } catch (error) {
+                console.log(error)
+                this.messageError = error.response.data.message
+            }
         },
     }
 }

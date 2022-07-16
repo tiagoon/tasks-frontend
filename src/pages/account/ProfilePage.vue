@@ -20,17 +20,29 @@
                         v-model="user.phone" 
                         placeholder="Telefone">
                     
-                    <button 
-                        @click="updateProfile()"
-                        type="button" 
-                        class="btn btn-primary me-2">
-                        Atualizar dados</button>
-                    
-                    <button 
-                        @click="accountDelete()"
-                        type="button" 
-                        class="btn text-danger">
-                        Excluir Conta</button>
+                    <div 
+                        v-if="messageError.length>0" 
+                        class="badge badge-pill bg-danger mb-3">
+                        {{messageError}}</div>
+
+                    <div v-if="!loading">
+                        <button 
+                            @click="updateProfile()"
+                            type="button" 
+                            class="btn btn-primary me-2">
+                            Atualizar dados</button>
+                        
+                        <button 
+                            @click="accountDelete()"
+                            type="button" 
+                            class="btn text-danger">
+                            Excluir Conta</button>
+                    </div>
+                    <b-spinner 
+                        v-else
+                        class="mx-auto"
+                        type="grow"
+                        variant="primary" />
                 </div>
             </div>
         </div>
@@ -48,21 +60,57 @@ export default {
     data() {
         return {
             user: {
-                name: 'Tiago Oliveira',
-                phone: '(79) 99999-9999',
-                email: 'tiago.on@live.com'
-            }
+                name: '',
+                phone: '',
+                email: ''
+            },
+            messageError: '',
+            loading: false
         }
     },
+
     created () {
         document.title = "Minha Conta | " + process.env.VUE_APP_NAME;
+        this.user = JSON.parse(localStorage.getItem('user'));
     },
+    
     methods: {
-        updateProfile() {
-            this.$router.push('/tasks');
+        async updateProfile() {
+            let config = {
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
+                }
+            }
+
+            try {
+                this.loading = true;
+                await this.$axios.put('/accounts', this.user, config);
+                localStorage.setItem('user', JSON.stringify(this.user));
+                this.loading = false;
+                this.$router.push('/tasks');
+            } catch (error) {
+                console.log(error)
+                this.messageError = error.response.data.message
+                this.loading = false;
+            }
         },
-        accountDelete() {
-            this.$router.push('/');
+
+        async accountDelete() {
+            let config = {
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
+                }
+            }
+
+            try {
+                this.loading = true
+                await this.$axios.delete('/accounts', config)
+                this.loading = false
+                this.$router.push('/')
+            } catch (error) {
+                this.loading = false
+                this.messageError = error.response.data.message
+            }
         }
     },
 }

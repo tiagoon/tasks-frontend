@@ -9,31 +9,39 @@
             </div>
             <div class="form">
                 <b-form-input 
-                    v-model="selectedText" 
+                    v-model="user.name" 
                     class="mb-3"
                     placeholder="Nome" />
 
                 <b-form-input 
-                    v-model="selectedText" 
+                    v-model="user.email" 
                     class="mb-3"
                     placeholder="E-mail" />
 
                 <b-form-input 
-                    v-model="selectedText" 
+                    v-model="user.phone" 
                     class="mb-3"
                     placeholder="Telefone" />
 
                 <b-form-input 
-                    v-model="selectedText" 
+                    v-model="user.password" 
                     class="mb-3"
                     placeholder="Crie uma senha" />
                 
+                <div v-if="messageError.length>0" class="badge badge-pill bg-danger mb-3">{{messageError}}</div>
+
                 <div class="d-grid gap-2">
                     <b-button 
+                        v-if="!loading"
                         @click="register"
                         block
                         variant="primary">Cadastrar
                         </b-button>
+                    <b-spinner 
+                        v-else
+                        class="mx-auto"
+                        type="grow"
+                        variant="primary" />
                 </div>
             </div>
             <div class="or-option">ou</div>
@@ -52,12 +60,46 @@
 <script>
 export default {
     name: 'RegisterPage',
+    
+    data() {
+        return {
+            user: {
+                name: '',
+                email: '',
+                phone: '',
+                password: ''
+            },
+            messageError: '',
+            loading: false
+        }
+    },
+
     methods: {
         login() {
             this.$router.push('/');
         },
-        register() {
-            this.$router.push('/tasks');
+        
+        async register() {
+            let config = {
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
+                }
+            }
+
+            try {
+                this.loading = true
+                const response = await this.$axios.post('/auth/register', this.user, config)
+                
+                localStorage.setItem('token', response.data.token)
+                localStorage.setItem('user', JSON.stringify(response.data.user))
+
+                this.loading = false
+                this.$router.push('/tasks')
+                
+            } catch (error) {
+                this.loading = false
+                this.messageError = error.response.data.message
+            }
         }
     },
 }
