@@ -10,7 +10,7 @@ import 'bootstrap-vue-3/dist/bootstrap-vue-3.css'
 import '@/assets/scss/main.scss'
 
 const axiosInstance = axios.create({
-    baseURL: process.env.VUE_APP_BASE_URL
+    baseURL: process.env.VUE_API_URL
 })
 
 const app = createApp(App)
