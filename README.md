@@ -1,27 +1,34 @@
 # tasks-frontend
 
-## Test online
-Veja na [Vercel](https://tasks-frontend-livid.vercel.app/)
+Aplicação web para gerenciar tarefas. [Ver API](https://github.com/tiagoon/tasks-api)
 
-## Project setup
+
+## Configuração do Projeto
+
+### Crie o .env e aponte para a sua API
+
+```
+cp .env.example .env
+```
+
+
+### Instale as dependências
+
 ```
 yarn install
 ```
 
-### Compiles and hot-reloads for development
+### Inicie o servidor local
+
 ```
 yarn serve
 ```
 
-### Compiles and minifies for production
+### Crie o build
 ```
 yarn build
 ```
 
-### Lints and fixes files
-```
-yarn lint
-```
+## Definições
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Usando `Nodejs v14`
